@@ -32,6 +32,9 @@ class World:
             return False
         return True
 
+    def is_tree(self, pos):
+        return self.in_world_bounds(pos) and self.MAP[pos.y][pos.x] == '#'
+
     def can_move_to(self, pos):
         if not self.in_world_bounds(pos):
             return False

@@ -12,4 +12,4 @@ class Player(NPC):
 
     @classmethod
     def _can_move_to(cls, world, pos):
-        return True
+        return not world.is_tree(pos)

@@ -10,7 +10,7 @@ import pygame as pg
 from abc import abstractmethod
 from geometry import Direction, pdist, Point, Rotation
 
-from map import MAP
+from map import get_map
 from world import World
 
 
@@ -142,11 +142,9 @@ class Game:
     def reset(self):
         self.scheduled_events = []
 
-        self.world = World(MAP, self.N_GROUND_TILES)
+        self.world = World(get_map(), self.N_GROUND_TILES)
         self.new_pos = Point(self.world.player.pos.x,
                              self.world.player.pos.y)
-
-        self.world = World(MAP, self.N_GROUND_TILES)
 
         self.state = GameState.STARTED
 
@@ -308,7 +306,7 @@ class Game:
                 if self.new_pos.y < self.world.player.pos.y \
                 else Direction.DOWN
 
-        if self.world.can_move_to(self.new_pos):
+        if self.world.player.can_move_to(self.world, self.new_pos):
             self.world.player.pos = self.new_pos
         else:
             self.new_pos = self.world.player.pos
