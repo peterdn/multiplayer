@@ -1,0 +1,14 @@
+syntax = "proto3";
+package game;
+
+service Game {
+    rpc PlayGame (PlayGameRequest) returns (PlayGameResponse);
+}
+
+message PlayGameRequest {
+    string message = 1;
+}
+
+message PlayGameResponse {
+    string message = 1;
+}
