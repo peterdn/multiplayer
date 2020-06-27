@@ -1,7 +1,10 @@
 use tonic::{transport::Server, Code, Request, Response, Status};
 
 use game::game_server::{Game, GameServer};
-use game::{Map, PlayGameRequest, PlayGameResponse, Size, StartGameRequest, StartGameResponse};
+use game::{
+    GameStateUpdate, Map, PlayGameRequest, PlayGameResponse, PlayerState, Position, Size,
+    StartGameRequest, StartGameResponse,
+};
 
 use rand::Rng;
 use std::sync::Mutex;
@@ -16,6 +19,7 @@ pub mod game {
 struct GameState {
     id: i32,
     map: Map,
+    players: Vec<PlayerState>,
 }
 
 impl GameState {}
@@ -77,8 +81,29 @@ impl Game for TestGame {
             }
         }
 
+        // Generate player position
+        let mut playerx = 0;
+        let mut playery = 0;
+        loop {
+            playerx = rng.gen_range(0, world_size.width);
+            playery = rng.gen_range(0, world_size.height);
+            let idx = (playery * world_size.width + playerx) as usize;
+            if cells[idx] == 0 {
+                break;
+            }
+        }
+
+        let player = PlayerState {
+            player_id: 0,
+            position: Some(Position {
+                x: playerx,
+                y: playery,
+                facing: 2,
+            }),
+        };
+
         let map = game::Map {
-            map_size: Some(world_size),
+            map_size: Some(world_size.clone()),
             cells,
         };
 
@@ -88,6 +113,7 @@ impl Game for TestGame {
             (*games).push(GameState {
                 id: ngames as i32,
                 map: map.clone(),
+                players: vec![player],
             });
             println!("Created game id: {}", ngames);
         }
@@ -104,10 +130,26 @@ impl Game for TestGame {
         &self,
         request: Request<PlayGameRequest>,
     ) -> Result<Response<PlayGameResponse>, Status> {
-        println!("Got a request: {:?}", request);
+        let request = request.into_inner();
+
+        println!("Got a request for game id: {}", request.game_id);
+
+        let world_map = {
+            let games = self.games.lock().unwrap();
+            (*games)[request.game_id as usize].map.clone()
+        };
+
+        let players = {
+            let games = self.games.lock().unwrap();
+            (*games)[request.game_id as usize].players.clone()
+        };
 
         let reply = game::PlayGameResponse {
-            message: "this is a test response".into(),
+            player_id: 0,
+            game_state: Some(game::GameStateUpdate {
+                world_map: Some(world_map),
+                players: players,
+            }),
         };
 
         Ok(Response::new(reply))

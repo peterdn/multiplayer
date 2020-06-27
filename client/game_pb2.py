@@ -19,10 +19,50 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\ngame.proto\x12\x04game\"2\n\x10StartGameRequest\x12\x1e\n\nworld_size\x18\x01 \x01(\x0b\x32\n.game.Size\"B\n\x11StartGameResponse\x12\x0f\n\x07game_id\x18\x01 \x01(\x05\x12\x1c\n\tworld_map\x18\x02 \x01(\x0b\x32\t.game.Map\"\"\n\x0fPlayGameRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\"#\n\x10PlayGameResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"%\n\x04Size\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\"_\n\x03Map\x12\x1c\n\x08map_size\x18\x01 \x01(\x0b\x32\n.game.Size\x12\x1d\n\x05\x63\x65lls\x18\x02 \x03(\x0e\x32\x0e.game.Map.Cell\"\x1b\n\x04\x43\x65ll\x12\t\n\x05\x45mpty\x10\x00\x12\x08\n\x04Wall\x10\x01\x32\x7f\n\x04Game\x12<\n\tStartGame\x12\x16.game.StartGameRequest\x1a\x17.game.StartGameResponse\x12\x39\n\x08PlayGame\x12\x15.game.PlayGameRequest\x1a\x16.game.PlayGameResponseb\x06proto3'
+  serialized_pb=b'\n\ngame.proto\x12\x04game\"2\n\x10StartGameRequest\x12\x1e\n\nworld_size\x18\x01 \x01(\x0b\x32\n.game.Size\"B\n\x11StartGameResponse\x12\x0f\n\x07game_id\x18\x01 \x01(\x05\x12\x1c\n\tworld_map\x18\x02 \x01(\x0b\x32\t.game.Map\"R\n\x0fPlayGameRequest\x12\x0f\n\x07game_id\x18\x01 \x01(\x05\x12.\n\x13player_state_update\x18\x02 \x01(\x0b\x32\x11.game.PlayerState\"P\n\x10PlayGameResponse\x12\x11\n\tplayer_id\x18\x01 \x01(\x05\x12)\n\ngame_state\x18\x02 \x01(\x0b\x32\x15.game.GameStateUpdate\"S\n\x0fGameStateUpdate\x12\x1c\n\tworld_map\x18\x01 \x01(\x0b\x32\t.game.Map\x12\"\n\x07players\x18\x02 \x03(\x0b\x32\x11.game.PlayerState\"B\n\x0bPlayerState\x12\x11\n\tplayer_id\x18\x01 \x01(\x05\x12 \n\x08position\x18\x02 \x01(\x0b\x32\x0e.game.Position\"\x8b\x01\n\x08Position\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x05\x12(\n\x06\x66\x61\x63ing\x18\x03 \x01(\x0e\x32\x18.game.Position.Direction\"?\n\tDirection\x12\x0b\n\x07INVALID\x10\x00\x12\x06\n\x02UP\x10\x01\x12\x08\n\x04\x44OWN\x10\x02\x12\x08\n\x04LEFT\x10\x03\x12\t\n\x05RIGHT\x10\x04\"%\n\x04Size\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\"_\n\x03Map\x12\x1c\n\x08map_size\x18\x01 \x01(\x0b\x32\n.game.Size\x12\x1d\n\x05\x63\x65lls\x18\x02 \x03(\x0e\x32\x0e.game.Map.Cell\"\x1b\n\x04\x43\x65ll\x12\t\n\x05\x45mpty\x10\x00\x12\x08\n\x04Wall\x10\x01\x32\x7f\n\x04Game\x12<\n\tStartGame\x12\x16.game.StartGameRequest\x1a\x17.game.StartGameResponse\x12\x39\n\x08PlayGame\x12\x15.game.PlayGameRequest\x1a\x16.game.PlayGameResponseb\x06proto3'
 )
 
 
+
+_POSITION_DIRECTION = _descriptor.EnumDescriptor(
+  name='Direction',
+  full_name='game.Position.Direction',
+  filename=None,
+  file=DESCRIPTOR,
+  create_key=_descriptor._internal_create_key,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='INVALID', index=0, number=0,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='UP', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='DOWN', index=2, number=2,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='LEFT', index=3, number=3,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='RIGHT', index=4, number=4,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=536,
+  serialized_end=599,
+)
+_sym_db.RegisterEnumDescriptor(_POSITION_DIRECTION)
 
 _MAP_CELL = _descriptor.EnumDescriptor(
   name='Cell',
@@ -44,8 +84,8 @@ _MAP_CELL = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=320,
-  serialized_end=347,
+  serialized_start=708,
+  serialized_end=735,
 )
 _sym_db.RegisterEnumDescriptor(_MAP_CELL)
 
@@ -130,9 +170,16 @@ _PLAYGAMEREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='message', full_name='game.PlayGameRequest.message', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      name='game_id', full_name='game.PlayGameRequest.game_id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='player_state_update', full_name='game.PlayGameRequest.player_state_update', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -149,7 +196,7 @@ _PLAYGAMEREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=140,
-  serialized_end=174,
+  serialized_end=222,
 )
 
 
@@ -162,9 +209,16 @@ _PLAYGAMERESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='message', full_name='game.PlayGameResponse.message', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      name='player_id', full_name='game.PlayGameResponse.player_id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='game_state', full_name='game.PlayGameResponse.game_state', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -180,8 +234,133 @@ _PLAYGAMERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=176,
-  serialized_end=211,
+  serialized_start=224,
+  serialized_end=304,
+)
+
+
+_GAMESTATEUPDATE = _descriptor.Descriptor(
+  name='GameStateUpdate',
+  full_name='game.GameStateUpdate',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='world_map', full_name='game.GameStateUpdate.world_map', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='players', full_name='game.GameStateUpdate.players', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=306,
+  serialized_end=389,
+)
+
+
+_PLAYERSTATE = _descriptor.Descriptor(
+  name='PlayerState',
+  full_name='game.PlayerState',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='player_id', full_name='game.PlayerState.player_id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='position', full_name='game.PlayerState.position', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=391,
+  serialized_end=457,
+)
+
+
+_POSITION = _descriptor.Descriptor(
+  name='Position',
+  full_name='game.Position',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='x', full_name='game.Position.x', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='y', full_name='game.Position.y', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='facing', full_name='game.Position.facing', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _POSITION_DIRECTION,
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=460,
+  serialized_end=599,
 )
 
 
@@ -219,8 +398,8 @@ _SIZE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=213,
-  serialized_end=250,
+  serialized_start=601,
+  serialized_end=638,
 )
 
 
@@ -259,12 +438,19 @@ _MAP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=252,
-  serialized_end=347,
+  serialized_start=640,
+  serialized_end=735,
 )
 
 _STARTGAMEREQUEST.fields_by_name['world_size'].message_type = _SIZE
 _STARTGAMERESPONSE.fields_by_name['world_map'].message_type = _MAP
+_PLAYGAMEREQUEST.fields_by_name['player_state_update'].message_type = _PLAYERSTATE
+_PLAYGAMERESPONSE.fields_by_name['game_state'].message_type = _GAMESTATEUPDATE
+_GAMESTATEUPDATE.fields_by_name['world_map'].message_type = _MAP
+_GAMESTATEUPDATE.fields_by_name['players'].message_type = _PLAYERSTATE
+_PLAYERSTATE.fields_by_name['position'].message_type = _POSITION
+_POSITION.fields_by_name['facing'].enum_type = _POSITION_DIRECTION
+_POSITION_DIRECTION.containing_type = _POSITION
 _MAP.fields_by_name['map_size'].message_type = _SIZE
 _MAP.fields_by_name['cells'].enum_type = _MAP_CELL
 _MAP_CELL.containing_type = _MAP
@@ -272,6 +458,9 @@ DESCRIPTOR.message_types_by_name['StartGameRequest'] = _STARTGAMEREQUEST
 DESCRIPTOR.message_types_by_name['StartGameResponse'] = _STARTGAMERESPONSE
 DESCRIPTOR.message_types_by_name['PlayGameRequest'] = _PLAYGAMEREQUEST
 DESCRIPTOR.message_types_by_name['PlayGameResponse'] = _PLAYGAMERESPONSE
+DESCRIPTOR.message_types_by_name['GameStateUpdate'] = _GAMESTATEUPDATE
+DESCRIPTOR.message_types_by_name['PlayerState'] = _PLAYERSTATE
+DESCRIPTOR.message_types_by_name['Position'] = _POSITION
 DESCRIPTOR.message_types_by_name['Size'] = _SIZE
 DESCRIPTOR.message_types_by_name['Map'] = _MAP
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -304,6 +493,27 @@ PlayGameResponse = _reflection.GeneratedProtocolMessageType('PlayGameResponse', 
   })
 _sym_db.RegisterMessage(PlayGameResponse)
 
+GameStateUpdate = _reflection.GeneratedProtocolMessageType('GameStateUpdate', (_message.Message,), {
+  'DESCRIPTOR' : _GAMESTATEUPDATE,
+  '__module__' : 'game_pb2'
+  # @@protoc_insertion_point(class_scope:game.GameStateUpdate)
+  })
+_sym_db.RegisterMessage(GameStateUpdate)
+
+PlayerState = _reflection.GeneratedProtocolMessageType('PlayerState', (_message.Message,), {
+  'DESCRIPTOR' : _PLAYERSTATE,
+  '__module__' : 'game_pb2'
+  # @@protoc_insertion_point(class_scope:game.PlayerState)
+  })
+_sym_db.RegisterMessage(PlayerState)
+
+Position = _reflection.GeneratedProtocolMessageType('Position', (_message.Message,), {
+  'DESCRIPTOR' : _POSITION,
+  '__module__' : 'game_pb2'
+  # @@protoc_insertion_point(class_scope:game.Position)
+  })
+_sym_db.RegisterMessage(Position)
+
 Size = _reflection.GeneratedProtocolMessageType('Size', (_message.Message,), {
   'DESCRIPTOR' : _SIZE,
   '__module__' : 'game_pb2'
@@ -327,8 +537,8 @@ _GAME = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=349,
-  serialized_end=476,
+  serialized_start=737,
+  serialized_end=864,
   methods=[
   _descriptor.MethodDescriptor(
     name='StartGame',

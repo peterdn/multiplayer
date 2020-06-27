@@ -123,7 +123,7 @@ class GameController(Controller):
 class Game:
     N_GROUND_TILES = 30
 
-    def __init__(self, screen):
+    def __init__(self, screen, game_id=None):
         font_path = os.path.join(resource_dir(), "freesansbold.ttf")
         self.title_font = pg.font.Font(font_path, 48)
         self.stats_font = pg.font.Font(font_path, 28)
@@ -137,12 +137,14 @@ class Game:
             GameState.STARTED: GameController(),
         }
 
+        self.game_id = game_id
         self.reset()
 
     def reset(self):
         self.scheduled_events = []
 
-        self.world = World(get_map(), self.N_GROUND_TILES)
+        m, self.game_id = get_map(self.game_id)
+        self.world = World(m, self.N_GROUND_TILES)
         self.new_pos = Point(self.world.player.pos.x,
                              self.world.player.pos.y)
 
@@ -319,7 +321,7 @@ class ScheduledEvent:
         self.last_timestamp = GameTime.current_time_ms()
 
 
-def main():
+def main(args):
     pg.init()
     pg.font.init()
 
@@ -328,7 +330,8 @@ def main():
 
     pg.display.set_caption('multiplayer test')
 
-    game = Game(screen)
+    game_id = int(args[0]) if len(args) > 0 else None
+    game = Game(screen, game_id)
     game.load_assets()
 
     last_move_timestamp = 0
@@ -352,4 +355,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])
